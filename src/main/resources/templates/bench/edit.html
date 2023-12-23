@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.altraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master/masterlayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div>
+        <h1>Edit Bench Registration Form</h1>
+    </div>
+    <form th:action="@{/bench/edit}" th:object="${bench}" method="post">
+        <input type="hidden" th:value="${bench.id}" name="id">
+
+
+        <div class="form-group">
+            <label for="benchName">Bench Name</label>
+            <input type="text" class="form-control" id="benchName" th:value="${bench.benchName}" name="benchName" maxlength=25  required>
+        </div>
+        <div class="form-group">
+            <label for="maxNumberOfJudges">Maximum Number Of Judges</label>
+            <input type="number" class="form-control" id="maxNumberOfJudges" th:value="${bench.maxNumberOfJudges}" name="maxNumberOfJudges" min=1 max=5 required>
+        </div>
+
+        <div>
+            <a th:href="@{/bench/list}" class="btn btn-outline-warning">Cancel</a>
+            <button class="btn btn-outline-success" type="submit">Update</button>
+
+        </div>
+
+    </form>
+
+
+</th:block>
+
+<th:block layout:fragment="footer"></th:block>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.altraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master/masterlayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div>
+        <h1>New Case Appointment Registration Form</h1>
+    </div>
+    <form th:action="@{/caseAppointment/new}" th:object="${caseAppointment}" method="post">
+        <fieldset>
+
+            <input type="hidden" th:value="${caseAppointment.id}" name="id">
+
+            <div class="form-group">
+                <label for="casedDate">Case Date</label>
+                <input type="date" class="form-control" id="casedDate" step="any" th:value="${caseAppointment.casedDate}" name="casedDate" min="2023-12-23" max="2030-12-31" required>
+            </div>
+            <div class="form-group">
+                <label for="bench">Bench Name</label>
+                <select class="form-control" th:field="*{bench}"  id="bench"required>
+                    <th:block th:each="Item: ${bench}">
+                        <option  th:value="${Item.id}" th:text="${Item.benchName}"/>
+                    </th:block>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="cases">Case Number(ID)</label>
+                <select class="form-control" th:field="*{cases}"  id="cases"required>
+                    <th:block th:each="Item: ${cases}">
+                        <option  th:value="${Item.id}" th:text="${Item.id}"/>
+                    </th:block>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="appointmentDate">Decided/Appointed Date</label>
+                <input type="date" class="form-control" id="appointmentDate" step="any" th:value="${caseAppointment.appointmentDate}" name="appointmentDate" min="2023-12-23" max="2030-12-31" required>
+            </div>
+            <div class="form-group">
+                <label for="givenOrders">Type of Order </label>
+                <select name="givenOrders" id="givenOrders" th:value="${caseAppointment.givenOrders}" required>
+                    <option value="Appointed">Appointed</option>
+                    <option value="Decided">Decided</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="shortDescription">Short Description</label>
+                <input type="text" class="form-control" id="shortDescription" th:value="${caseAppointment.shortDescription}" name="shortDescription" maxlength=255 required>
+            </div>
+              <div>
+                <a th:href="@{/caseAppointment/list}" class="btn btn-outline-warning">Cancel</a>
+                <button class="btn btn-outline-success" type="submit">Save</button>
+
+            </div>
+
+        </fieldset>
+    </form>
+
+
+
+</th:block>
+
+<th:block layout:fragment="footer"></th:block>
+
+</body>
+</html>

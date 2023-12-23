@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.altraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master/masterlayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div>
+        <h1>List of Case Appointment Judges</h1>
+    </div>
+    <div>
+        <a th:href="@{/caseAppointmentJudges/list}"  class="nav-link" th:method="GET">New Case Appointment Judges</a>
+    </div>
+    <table class="table table-hover" id="supplier-table">
+        <thead class="table-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Judge Name</th>
+            <th scope="col">Case Number and Date </th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="caseJudges:${caseAppointmentJudges}">
+            <th th:text="${caseJudges.id}"></th>
+            <td th:text="${caseJudges.judges.judgeName}"></td>
+            <td th:text="${caseJudges.caseAppointment.id} + ' - ' + ${caseJudges.caseAppointment.casedDate}"></td>
+            <td><a class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete?')" th:href="@{/caseAppointmentJudges/delete/__${caseJudges.id}__}">Delete</a>
+                <a th:href="@{/caseAppointmentJudges/edit/__${caseJudges.id}__}" class="btn btn-outline-warning">Edit</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+</th:block>
+
+<th:block layout:fragment="footer"></th:block>
+
+</body>
+</html>

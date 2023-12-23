@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.altraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master/masterlayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div>
+        <h1>New Case Appointment Judges Registration Form</h1>
+    </div>
+    <form th:action="@{/caseAppointmentJudges/new}" th:object="${caseAppointmentJudges}" method="post">
+        <fieldset>
+
+            <input type="hidden" th:value="${caseAppointmentJudges.id}" name="id">
+            <div class="form-group">
+                <label for="judges">Judge Name</label>
+                <select class="form-control" th:field="*{judges}"  id="judges"required>
+                    <th:block th:each="Item: ${judges}">
+                        <option  th:value="${Item.id}" th:text="${Item.judgeName}"/>
+                    </th:block>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="caseAppointment">Case Number-Case Date</label>
+                <select class="form-control" th:field="*{caseAppointment}"  id="caseAppointment" required>
+                    <th:block th:each="Item: ${caseAppointment}">
+                        <option  th:value="${Item.id}" th:text="${Item.id} + ' - ' + ${Item.casedDate} "/>
+                    </th:block>
+                </select>
+            </div>
+            <div>
+                <a th:href="@{/caseAppointmentJudges/list}" class="btn btn-outline-warning">Cancel</a>
+                <button class="btn btn-outline-success" type="submit">Save</button>
+
+            </div>
+        </fieldset>
+    </form>
+
+
+
+</th:block>
+
+<th:block layout:fragment="footer"></th:block>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.altraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master/masterlayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div>
+        <h1>New Case Registration Form</h1>
+    </div>
+    <form th:action="@{/cases/new}" th:object="${cases}" method="post">
+        <input type="hidden" th:value="${cases.id}" name="id">
+
+
+        <div class="form-group">
+            <label for="plaintiffName">plaintiffName</label>
+            <input type="text" class="form-control" id="plaintiffName" th:value="${cases.plaintiffName}" name="plaintiffName" maxlength=50  required>
+        </div>
+        <div class="form-group">
+            <label for="defendantName">defendantName</label>
+            <input type="text" class="form-control" id="defendantName" th:value="${cases.defendantName}" name="defendantName" maxlength=50 required>
+        </div>
+        <!--
+        <div class="form-group">
+            <label for="fileType">fileType</label>
+            <input type="text" class="form-control" id="fileType" th:value="${cases.fileType}" name="fileType" maxlength=25 required>
+        </div> -->
+        <div class="form-group">
+            <label for="fileType">Case Level </label>
+            <select name="fileType" id="fileType" th:value="${cases.fileType}" required>
+                <option value="Civil">Civil</option>
+                <option value="Criminal">Criminal</option>
+            </select>
+        </div>
+        <!--
+        <div class="form-group">
+            <label for="caseLevel">Case Level</label>
+            <input type="text" class="form-control" id="caseLevel" th:value="${cases.caseLevel}" name="caseLevel" maxlength=15 required>
+        </div>-->
+        <div class="form-group">
+            <label for="caseLevel">Case Level </label>
+            <select name="caseLevel" id="caseLevel" th:value="${cases.caseLevel}" required>
+                <option value="Direct">Direct</option>
+                <option value="Appeal">Appeal</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="caseType">caseType</label>
+            <input type="text" class="form-control" id="caseType" th:value="${cases.caseType}" name="caseType" maxlength=255 required>
+        </div>
+
+        <div>
+            <a th:href="@{/cases/list}" class="btn btn-outline-warning">Cancel</a>
+            <button class="btn btn-outline-success" type="submit">Save</button>
+
+        </div>
+
+    </form>
+
+
+
+</th:block>
+
+<th:block layout:fragment="footer"></th:block>
+
+</body>
+</html>

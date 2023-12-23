@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.altraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master/masterlayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Case Appointment List</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div>
+        <h1>List of Case Appointments</h1>
+    </div>
+    <div>
+        <a th:href="@{/caseAppointment/new}"  class="nav-link" th:method="GET">New Case Appointment</a>
+    </div>
+    <table class="table table-hover" id="supplier-table">
+        <thead class="table-dark">
+        <tr>
+            <th scope="col"> ID</th>
+            <th scope="col">Case Date</th>
+            <th scope="col">Bench Name </th>
+            <th scope="col">Case Number(Id)</th>
+            <th scope="col">Appointed/Decided Date </th>
+            <th scope="col">Type of Order</th>
+            <th scope="col">Short Description</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="appointment:${caseAppointment}">
+            <th th:text="${appointment.id}"></th>
+            <td th:text="${appointment.casedDate}"></td>
+            <td th:text="${appointment.bench.benchName}"></td>
+            <td th:text="${appointment.cases.id}"></td>
+            <td th:text="${appointment.appointmentDate}"></td>
+            <td th:text="${appointment.givenOrders}"></td>
+            <td th:text="${appointment.shortDescription}"></td>
+            <td><a class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete with its related Records?')"
+                   th:href="@{/caseAppointment/delete/__${appointment.id}__}">Delete</a>
+                <a th:href="@{/caseAppointment/edit/__${appointment.id}__}" class="btn btn-outline-warning">Edit</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+</th:block>
+
+<th:block layout:fragment="footer"></th:block>
+
+</body>
+</html>

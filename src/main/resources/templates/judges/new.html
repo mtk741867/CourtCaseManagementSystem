@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.altraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master/masterlayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div>
+        <h1>New Judge Registration Form</h1>
+    </div>
+    <form th:action="@{/judges/new}" th:object="${judges}" method="post">
+        <input type="hidden" th:value="${judges.id}" name="id">
+
+        <div class="form-group">
+            <label for="judgeName">Judge Name</label>
+            <input type="text" class="form-control" id="judgeName" th:value="${judges.judgeName}" name="judgeName" maxlength=50  required>
+        </div>
+
+        <div>
+            <a th:href="@{/judges/list}" class="btn btn-outline-warning">Cancel</a>
+            <button class="btn btn-outline-success" type="submit">Save</button>
+
+        </div>
+
+    </form>
+
+
+
+</th:block>
+
+<th:block layout:fragment="footer"></th:block>
+
+</body>
+</html>

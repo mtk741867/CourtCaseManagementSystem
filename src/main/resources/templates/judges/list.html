@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.altraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master/masterlayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div>
+        <h2>List OF Judges</h2>
+    </div>
+    <div>
+        <!--
+        <a th:href="@{/cases/new}" class="btn btn-outline-success" th:method="GET">New Case</a>
+        -->
+        <a th:href="@{/judges/new}"  class="nav-link" th:method="GET">New Judges</a>
+    </div>
+    <table class="table table-hover" id="supplier-table">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Judge Name</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="judge:${judges}">
+                <th th:text="${judge.id}"></th>
+                <td th:text="${judge.judgeName}"></td>
+                <td><a  class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete With its Related Records?')"  th:href="@{/judges/delete/__${judge.id}__}" >Delete</a>
+                    <a th:href="@{/judges/edit/__${judge.id}__}" class="btn btn-outline-warning">Edit</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+</th:block>
+
+<th:block layout:fragment="footer"></th:block>
+
+</body>
+</html>
