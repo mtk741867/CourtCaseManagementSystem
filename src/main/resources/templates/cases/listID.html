@@ -22,33 +22,11 @@
         <h2>List OF Cases</h2>
     </div>
     <div>
-
+        <!--
+        <a th:href="@{/cases/new}" class="btn btn-outline-success" th:method="GET">New Case</a>
+        -->
         <a th:href="@{/cases/new}"  class="nav-link" th:method="GET">New Case</a>
     </div>
-
-    <form th:action="@{/cases/list}"  method="POST">
-       <table align="right">
-           <tr>
-        <th>
-            <input type="number" step="1.0" class="form-control" id="caseid"  name="caseid" maxlength=50 width="50">
-            <button class="btn btn-outline-success" type="submit">Search By Case ID</button>
-        </th>
-           </tr>
-           <tr>
-        <th>
-            <input type="text" step="1.0" class="form-control" id="plaintiffName"  name="plaintiffName" maxlength=50 width="50">
-            <button class="btn btn-outline-success" type="submit">Search By PlaintiffName</button>
-        </th>
-           </tr>
-           <tr>
-        <th>
-            <input type="text" step="1.0" class="form-control" id="defendantName"  name="defendantName" maxlength=50  width="50">
-            <button class="btn btn-outline-success" type="submit">Search By DefendantName</button>
-        </th>
-           </tr>
-       </table>
-    </form>
-
     <table class="table table-hover" id="supplier-table">
         <thead class="table-dark">
             <tr>

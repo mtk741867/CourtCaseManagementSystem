@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -56,6 +53,32 @@ public class CasesController {
     public String deleteCases(@PathVariable Long id){
         casesRepository.deleteById(id);
         return "redirect:/cases/list";
+    }
+
+    /*@RequestMapping(value = "/cases/list", method = RequestMethod.POST)
+    public String SearchCases(Model model,@RequestParam Long caseid){
+        Cases cases= casesRepository.findById(caseid).orElse(null);
+        model.addAttribute("cases", cases);
+        return "cases/list";
+    }*/
+    @RequestMapping(value = "/cases/list", method = RequestMethod.POST)
+    public String SearchCasesByName(Model model,@RequestParam String caseid,@RequestParam String plaintiffName,@RequestParam String defendantName){
+        if(!caseid.equals("")) {
+            Long id=Long.parseLong(caseid);
+            Cases cases= casesRepository.findById(id).orElse(null);
+            model.addAttribute("cases", cases);
+            return "cases/list";
+        } else if (!plaintiffName.equals("")) {
+            List<Cases> cases = casesRepository.findByPlaintiffNameContaining(plaintiffName);
+            model.addAttribute("cases", cases);
+            return "cases/list";
+        }else {
+            List<Cases> cases = casesRepository.findByDefendantNameContaining(defendantName);
+            model.addAttribute("cases", cases);
+            return "cases/list";
+        }
+       // model.addAttribute("cases", cases);
+        //return "cases/list";
     }
 
 }
