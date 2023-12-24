@@ -29,13 +29,12 @@
     </div>
     <form th:action="@{/bench/list}"  method="POST">
         <div class="form-group">
-            <label for="benchid">Enter Bench ID</label>
-            <input type="number" step="1.0" class="form-control" id="benchid"  name="benchid" min=1  required>
+            <label for="keyword">Enter Bench ID or Bench Name</label>
+            <input type="text" step="1.0" class="form-control" id="keyword"  name="keyword" maxlength=50 required>
         </div>
         <div>
             <button class="btn btn-outline-success" type="submit">Search</button>
         </div>
-
     </form>
     <table class="table table-hover" id="supplier-table">
         <thead class="table-dark">

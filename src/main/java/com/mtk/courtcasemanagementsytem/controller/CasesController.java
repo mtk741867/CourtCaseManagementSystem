@@ -61,7 +61,7 @@ public class CasesController {
         model.addAttribute("cases", cases);
         return "cases/list";
     }*/
-    @RequestMapping(value = "/cases/list", method = RequestMethod.POST)
+   /* @RequestMapping(value = "/cases/list", method = RequestMethod.POST)
     public String SearchCasesByName(Model model,@RequestParam String caseid,@RequestParam String plaintiffName,@RequestParam String defendantName){
         if(!caseid.equals("")) {
             Long id=Long.parseLong(caseid);
@@ -79,6 +79,20 @@ public class CasesController {
         }
        // model.addAttribute("cases", cases);
         //return "cases/list";
-    }
 
+
+    }*/
+    @RequestMapping(value = "/cases/list", method = RequestMethod.POST)
+    public String SearchCasesByName(Model model,@RequestParam String keyword) {
+        Long id = 0l;
+        try {
+            id = Long.parseLong(keyword);
+        } catch (Exception e) {
+            id = 0l;
+        }
+
+        List<Cases> cases = casesRepository.findByPlaintiffNameContainingOrDefendantNameContainingOrId(keyword,keyword,id);
+        model.addAttribute("cases", cases);
+        return "cases/list";
+    }
 }

@@ -8,7 +8,8 @@ import java.util.List;
 
 @Repository
 public interface CasesRepository extends JpaRepository<Cases,Long> {
-    List<Cases> findByPlaintiffNameContaining(String plaintiffName);
-    List<Cases> findByDefendantNameContaining(String defendantName);
+    List<Cases> findByPlaintiffNameContainingOrDefendantNameContainingOrId(String plaintiff,String defendant, Long id);
+    //List<Cases> findByPlaintiffNameContaining(String plaintiffName)
+    //List<Cases> findByDefendantNameContaining(String defendantName);
 
 }

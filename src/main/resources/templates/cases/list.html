@@ -25,7 +25,16 @@
 
         <a th:href="@{/cases/new}"  class="nav-link" th:method="GET">New Case</a>
     </div>
-
+    <form th:action="@{/cases/list}"  method="POST">
+        <div class="form-group">
+            <label for="keyword">Enter case ID or Plaintiff Name or Defendant Name</label>
+            <input type="text" step="1.0" class="form-control" id="keyword"  name="keyword" maxlength=50 required>
+        </div>
+        <div>
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </div>
+    </form>
+    <!--
     <form th:action="@{/cases/list}"  method="POST">
        <table align="right">
            <tr>
@@ -48,7 +57,7 @@
            </tr>
        </table>
     </form>
-
+-->
     <table class="table table-hover" id="supplier-table">
         <thead class="table-dark">
             <tr>

@@ -55,8 +55,17 @@ public class BenchController {
         return "redirect:/bench/list";
     }
     @RequestMapping(value = "/bench/list", method = RequestMethod.POST)
-    public String SearchBench(Model model,@RequestParam Long benchid){
-        Bench bench= benchRepository.findById(benchid).orElse(null);
+    public String SearchBench(Model model,@RequestParam String keyword){
+        /*Bench bench= benchRepository.findById(benchid).orElse(null);
+        model.addAttribute("bench", bench);
+        return "bench/list";*/
+        Long id=0l;
+        try{
+            id=Long.parseLong(keyword);
+        }catch (Exception e){
+            id=0l;
+        }
+        List<Bench> bench= benchRepository.findByBenchNameContainingOrId(keyword,id);
         model.addAttribute("bench", bench);
         return "bench/list";
     }
